@@ -12,7 +12,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#00001E'
+        primary: {
+          light: '#1E40AF',
+          dark: '#312E81',
+        },
+        secondary: {
+          light: '#60A5FA',
+          dark: '#3B82F6'
+        },
+        tertiary: {
+          light: '#1E3A8A',
+          dark: '#1E40AF',
+        },
+        silver: {
+          light: '#E5E7EB',
+          dark: '#4B5563'
+        },
       },
       fontFamily: {
         sans: ['Figtree', ...defaultTheme.fontFamily.sans],
