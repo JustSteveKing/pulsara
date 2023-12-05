@@ -1,16 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace {{ namespace }};
 
 use {{ namespacedUserModel }};
 
-class {{ class }}
+final class {{ class }}
 {
-    /**
-     * Create a new policy instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    //
 }
