@@ -2,9 +2,13 @@
   "name": "juststeveking/pulsara",
   "type": "project",
   "description": "The skeleton application for the Laravel framework.",
-  "keywords": [
-    "laravel",
-    "framework"
+  "authors": [
+    {
+      "role": "Developer",
+      "name": "Steve McDougall",
+      "email": "juststevemcd@gmail.com",
+      "homepage": "https://www.juststeveking.uk/"
+    }
   ],
   "license": "MIT",
   "require": {
@@ -24,6 +28,7 @@
     "nunomaduro/collision": "^7.10",
     "pestphp/pest": "^2.27",
     "pestphp/pest-plugin-laravel": "^2.2",
+    "phpstan/phpstan": "^1.10",
     "roave/security-advisories": "dev-latest",
     "spatie/laravel-ignition": "^2.3.1"
   },
@@ -52,6 +57,12 @@
     ],
     "post-create-project-cmd": [
       "@php artisan key:generate --ansi"
+    ],
+    "pint": [
+      "./vendor/bin/pint"
+    ],
+    "stan": [
+      "./vendor/bin/phpstan analyse --memory-limit=3g"
     ]
   },
   "extra": {
