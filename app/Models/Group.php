@@ -7,10 +7,12 @@ namespace App\Models;
 use App\Enums\Publishing\Status;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $id
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property null|CarbonInterface $created_at
  * @property null|CarbonInterface $updated_at
  * @property User $user
+ * @property Collection<Post> $posts
  */
 final class Group extends Model
 {
@@ -57,6 +60,14 @@ final class Group extends Model
         return $this->belongsTo(
             related: User::class,
             foreignKey: 'user_id',
+        );
+    }
+
+    public function posts(): HasMany
+    {
+        return $this->hasMany(
+            related: Post::class,
+            foreignKey: 'group_id',
         );
     }
 }
