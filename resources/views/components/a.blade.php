@@ -2,6 +2,10 @@
     'title'
 ])
 
-<a {!! $attributes->merge(['class' => 'font-semibold text-indigo-600 hover:text-indigo-500']) !!}>
+<a
+    wire:navigate
+    {!! $attributes->merge(['class' => 'font-semibold text-primary-dark hover:text-tertiary-light dark:text-primary-dark dark:hover:text-tertiary-dark']) !!}
+    title="{{ $title }}"
+>
     {{ $slot }}
 </a>

@@ -13,20 +13,20 @@ export default {
     extend: {
       colors: {
         primary: {
-          light: '#1E40AF',
-          dark: '#312E81',
-        },
-        secondary: {
-          light: '#60A5FA',
-          dark: '#3B82F6'
-        },
-        tertiary: {
-          light: '#1E3A8A',
+          light: '#312E81',
           dark: '#1E40AF',
         },
+        secondary: {
+          light: '#3B82F6',
+          dark: '#60A5FA'
+        },
+        tertiary: {
+          light: '#1E40AF',
+          dark: '#1E3A8A',
+        },
         silver: {
-          light: '#E5E7EB',
-          dark: '#4B5563'
+          light: '#4B5563',
+          dark: '#E5E7EB'
         },
       },
       fontFamily: {
