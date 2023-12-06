@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Publishing\Stage;
+use App\Models\Builders\PostBuilder;
 use Carbon\CarbonInterface;
+use Illuminate\Contracts\Database\Eloquent\Builder as BuilderContract;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +60,13 @@ final class Post extends Model
         return $this->belongsTo(
             related: Profile::class,
             foreignKey: 'profile_id',
+        );
+    }
+
+    public function newEloquentBuilder($query): BuilderContract
+    {
+        return new PostBuilder(
+            query: $query,
         );
     }
 }

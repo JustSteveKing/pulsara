@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace App\Http\Controllers\OAuth\GitHub;
 
 use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\SocialiteManager;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-final class RedirectController
+final readonly class RedirectController
 {
+    public function __construct(
+        private SocialiteManager $manager,
+    ) {}
+
     public function __invoke(Request $request): RedirectResponse
     {
-        return Socialite::driver(
+        return $this->manager->driver(
             driver: 'github',
         )->redirect();
     }

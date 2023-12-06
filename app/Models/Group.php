@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\Publishing\Status;
+use App\Models\Builders\GroupBuilder;
 use Carbon\CarbonInterface;
+use Illuminate\Contracts\Database\Eloquent\Builder as BuilderContract;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -68,6 +71,13 @@ final class Group extends Model
         return $this->hasMany(
             related: Post::class,
             foreignKey: 'group_id',
+        );
+    }
+
+    public function newEloquentBuilder($query): BuilderContract
+    {
+        return new GroupBuilder(
+            query: $query,
         );
     }
 }

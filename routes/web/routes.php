@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => view('welcome'));
+Route::get('/', \App\Livewire\Pages\Feed::class);
 
 Route::middleware(['guest'])->prefix('oauth')->as('oauth:')->group(
     base_path('routes/web/oauth.php'),
