@@ -14,6 +14,7 @@
   "require": {
     "php": "^8.3",
     "guzzlehttp/guzzle": "^7.8.1",
+    "juststeveking/sdk-tools": "^0.0.5",
     "laravel/breeze": "^1.26.2",
     "laravel/folio": "^1.1",
     "laravel/framework": "^10.35.0",

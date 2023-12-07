@@ -8,24 +8,17 @@ use App\Enums\Identity\Provider;
 use App\Http\Payloads\Auth\LoginPayload;
 use App\Http\Payloads\Auth\RegisterPayload;
 use App\Models\User;
-use Illuminate\Auth\AuthManager;
-use Illuminate\Database\DatabaseManager;
+use App\Services\Concerns\HasAuthAndDatabase;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Str;
+use Laravel\Sanctum\NewAccessToken;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Two\User as OAuthUser;
 use Throwable;
 
 final readonly class IdentityService
 {
-    /**
-     * @param AuthManager $auth
-     * @param DatabaseManager $database
-     */
-    public function __construct(
-        private AuthManager $auth,
-        private DatabaseManager $database,
-    ) {
-    }
+    use HasAuthAndDatabase;
 
     /**
      * @param LoginPayload $payload
@@ -36,6 +29,11 @@ final readonly class IdentityService
         return $this->auth->attempt(
             credentials: $payload->toArray(),
         );
+    }
+
+    public function getAuthenticatedUser(): User|null|Authenticatable
+    {
+        return $this->auth->user();
     }
 
     /**
@@ -74,6 +72,20 @@ final readonly class IdentityService
 
         $this->auth->loginUsingId(
             id: $user->getKey(),
+        );
+    }
+
+    /**
+     * @param Authenticatable|User $user
+     * @param string $name
+     * @param array<int,string> $permissions
+     * @return NewAccessToken
+     */
+    public function createToken(Authenticatable|User $user, string $name, array $permissions = ['*']): NewAccessToken
+    {
+        return $user?->createToken(
+            name: $name,
+            abilities: $permissions,
         );
     }
 }

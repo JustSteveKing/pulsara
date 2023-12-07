@@ -8,6 +8,7 @@ use App\Enums\Identity\Provider;
 use App\Enums\Identity\Role;
 use Carbon\CarbonInterface;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $id
  * @property string $first_name
  * @property null|string $last_name
+ * @property string $email
  * @property null|string $password
  * @property Role $role
  * @property Provider $provider
@@ -72,6 +74,13 @@ final class User extends Authenticatable implements MustVerifyEmail
         'role' => Role::class,
         'provider' => Provider::class,
     ];
+
+    public function name(): Attribute
+    {
+        return new Attribute(
+            get: fn (): string => "{$this->first_name} {$this->last_name}",
+        );
+    }
 
     public function profile(): HasOne
     {

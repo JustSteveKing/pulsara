@@ -2,18 +2,24 @@
 
 declare(strict_types=1);
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+// Authenticate
+Route::middleware([])->prefix('auth')->as('auth:')->group(
+    base_path('routes/api/auth.php'),
+);
 
-Route::middleware('auth:sanctum')->get('/user', fn(Request $request) => $request->user());
+// Get my profile
+// Update my profile
+Route::middleware(['auth:sanctum'])->prefix('profiles')->as('profiles:')->group(
+    base_path('routes/api/profiles.php'),
+);
+
+
+// Group endpoints
+Route::middleware([])->prefix('feeds')->as('feeds:')->group(
+    base_path('routes/api/feeds.php'),
+);
+
+
+// Posting
